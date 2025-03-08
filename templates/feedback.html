@@ -182,14 +182,14 @@
 
     <!-- Multilingual capacity -->
     <div class="mb-4">
-      <label for="fluency_other" class="block mb-2 text-gray-200 font-medium">
+      <label for="multilingual_capacity" class="block mb-2 text-gray-200 font-medium">
         Multilingual capacity<br>
         <span class="text-sm text-gray-400">
           How well does the bot perform in other languages (report for any one other language)?
           (1 = Much inferior than English, 10 = At par with English)
         </span>
       </label>
-      <select id="fluency_other" name="fluency_other" required
+      <select id="multilingual_capacity" name="multilingual_capacity" required
               class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
         {% for i in range(1, 11) %}
           <option value="{{ i }}">{{ i }}</option>

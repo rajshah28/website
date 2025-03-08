@@ -48,12 +48,12 @@ def register():
             "graduation_year": request.form.get("graduation_year"),
             "age": request.form.get("age"),
             "gender": request.form.get("gender"),
+            "highest_education": request.form.get("highest_education"),
             "use_llms": request.form.get("use_llms"),
             "incorrect_example": request.form.get("incorrect_example"),
             "applied_llms": request.form.get("applied_llms"),
-            "highest_education": request.form.get("highest_education"),
             "difficult_case": request.form.get("difficult_case"),
-            "difficult_case_other": request.form.get("difficult_case_other"),
+            # "difficult_case_other": request.form.get("difficult_case_other"),
             "llm_usage": request.form.get("llm_usage")
         }
         
