@@ -6,7 +6,7 @@
     <div class="flex justify-between items-center text-white">
       <p class="font-bold text-2xl text-center">Query {{ current_group_idx + 1 }} of {{ total_groups }}</p>
     </div>
-    <h2 >{{ current_query }}</h2>
+    <h2 class="text-white text-center whitespace-pre-wrap">{{ current_query }}</h2>
   </div>
   <!-- End sticky header -->
   <form action="{{ url_for('rate') }}" method="post" class="space-y-6 mt-4">
@@ -21,7 +21,7 @@
       {% set idx = loop.index0 %}
       <div class="bg-gray-700 rounded-lg p-4 mb-6">
         <div class="flex justify-between items-center text-white mb-2">
-          <p class = "font-bold">Response: ({{ response.response_type }}) - {{ idx + 1 }} of {{ total_responses }}</p>
+          <p class="font-bold">Response: ({{ response.response_type }}) - {{ idx + 1 }} of {{ total_responses }}</p>
         </div>
         <p class="whitespace-pre-wrap text-white mb-4">{{ response.response }}</p>
         
@@ -44,15 +44,6 @@
             </div>
           </div>
         {% endfor %}
-        
-        <div class="mb-4">
-          <label for="response_review_{{ idx }}" class="block mb-2 font-semibold text-white">
-            What is your general idea about this response? Can you explain precisely? What would you like to change in this response?
-          </label>
-          <textarea id="response_review_{{ idx }}" name="response_review_{{ idx }}" rows="2" class="w-full p-2 rounded bg-gray-700 border hover:border-green-400 focus:border-green-600 focus:outline-none text-white">
-            {{ current_rating and current_rating[idx] and current_rating[idx].get('response_review') or "" }}
-          </textarea>
-        </div>
       </div>
     {% endfor %}
     

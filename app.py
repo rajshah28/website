@@ -216,14 +216,14 @@ def rate():
     
     if request.method == "POST":
         action = request.form.get("action")
-        # Save ratings for all responses in the current group
+        # Save ratings for all responses in the current group (without review field)
         ratings = file_details.get("ratings", [])
         current_group_ratings = ratings[current_group_idx]
         for i in range(total_responses):
             current_rating = {}
             for col in file_details.get("rating_columns", []):
                 current_rating[col] = request.form.get(f"{col}_{i}")
-            current_rating["response_review"] = request.form.get(f"response_review_{i}")
+            # Removed the review question processing
             current_group_ratings[i] = current_rating
         ratings[current_group_idx] = current_group_ratings
         file_details["ratings"] = ratings
@@ -245,7 +245,7 @@ def rate():
                         ratings_dict[row_index] = file_details["ratings"][g_idx][r_idx]
                 for col in file_details.get("rating_columns", []):
                     df[col] = df.index.map(lambda i: ratings_dict.get(i, {}).get(col))
-                df["response_review"] = df.index.map(lambda i: ratings_dict.get(i, {}).get("response_review"))
+                # Removed merging for "response_review" as it's no longer used.
                 save_excel(df, file_id)
                 return redirect(url_for("download_page", file=file_id))
         
@@ -272,6 +272,7 @@ def rate():
                            type_col=type_col,
                            file_id=file_id,
                            current_rating=current_rating)
+
 
 @app.route("/download_page", methods=["GET", "POST"])
 def download_page():
