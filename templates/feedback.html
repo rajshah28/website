@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105 border border-gray-700 p-8">
+  <h2 class="text-3xl font-bold mb-8 text-center text-white">
+    Legal Bot Feedback Survey
+  </h2>
+  <p class="text-gray-300 mb-4">
+    We appreciate your feedback on the Legal Bot, an automated legal research assistant designed to provide decision support to lawyers and expedite the legal judgment process.
+  </p>
+  <!-- New introductory texts -->
+  <p class="text-gray-300 mb-4">
+    We have shared 5 legal starter queries, which you can use as questions to start interacting with the bot, and then subsequently use your own questions.
+  </p>
+  <p class="text-gray-300 mb-4">
+    Starter questions for the bot - <a href="{{ url_for('starter_queries') }}" target="_blank" class="text-green-400 underline">View Starter Queries</a>
+  </p>
+  <p class="text-gray-300 mb-4">
+    Multilingual support: To use the legal chatbot in a different language, simply enter your query in that language, either by using a built-in language keyword or an external query translator such as Google Translate. To change the response language, click the Translate button and select your preferred language.
+  </p>
+  <p class="text-gray-300 mb-4">
+    Sign up in the page and use the legal bot interface.
+  </p>
+  <!-- Existing bot link -->
+  <p class="text-gray-300 mb-4">
+    Bot: <a href="https://greenai.services/signin" target="_blank" class="text-green-400 underline">
+      GAI LEGAL BOT
+    </a>
+  </p>
+  <p class="text-gray-300 mb-6">
+    Please evaluate the bot based on your overall experience using the following parameters. The survey consists of short-answer questions and rating-based responses.
+  </p>
+  
+  <form action="{{ url_for('feedback') }}" method="post" class="space-y-6">
+    <!-- Section 1: Usage in Your Studies -->
+    <h3 class="text-xl font-bold mb-2 text-white">1. Usage in Your Studies</h3>
+    <p class="text-gray-300 mb-2">
+      Would you consider using this bot for your coursework? (Yes/No)
+    </p>
+    <div class="mb-4">
+      <label class="inline-flex items-center text-gray-200">
+        <input type="radio" name="usage_coursework" value="Yes" required class="form-radio text-green-400 focus:ring-green-400" />
+        <span class="ml-2">Yes</span>
+      </label>
+      <label class="inline-flex items-center text-gray-200">
+        <input type="radio" name="usage_coursework" value="No" required class="form-radio text-green-400 focus:ring-green-400" />
+        <span class="ml-2">No</span>
+      </label>
+    </div>
+    <div class="mb-6">
+      <label for="usage_activities" class="block mb-2 text-gray-200 font-medium">
+        If yes, in which activities related to your studies or practice would you find this bot useful? (Please provide a short response.)
+      </label>
+      <textarea id="usage_activities" name="usage_activities" rows="3"
+                class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400"
+                placeholder="Describe the activities"></textarea>
+    </div>
+    
+    <!-- Section 2: Evaluation Criteria -->
+    <h3 class="text-xl font-bold mb-2 text-white">2. Evaluation Criteria</h3>
+    
+    <!-- Comprehensibility -->
+    <div class="mb-4">
+      <label for="comprehensibility" class="block mb-2 text-gray-200 font-medium">
+        Comprehensibility<br>
+        <span class="text-sm text-gray-400">
+          How well does the response understand and interpret the query?
+          Does it correctly identify the issue?
+          (1 = Completely misunderstood, 10 = Fully understood and accurately identified the issue)
+        </span>
+      </label>
+      <select id="comprehensibility" name="comprehensibility" required
+              class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
+        {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <!-- Fluency in English -->
+    <div class="mb-4">
+      <label for="fluency_english" class="block mb-2 text-gray-200 font-medium">
+        Fluency in English<br>
+        <span class="text-sm text-gray-400">
+          How well does the bot articulate its response in English?
+          (1 = Not fluent at all, 10 = Very fluent)
+        </span>
+      </label>
+      <select id="fluency_english" name="fluency_english" required
+              class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
+        {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <!-- Coverage -->
+    <div class="mb-4">
+      <label for="coverage" class="block mb-2 text-gray-200 font-medium">
+        Coverage<br>
+        <span class="text-sm text-gray-400">
+          Does the response address all relevant points needed to resolve the issue?
+          Is any critical information missing?
+          (1 = Does not answer at all, 10 = Fully answers all relevant aspects)
+        </span>
+      </label>
+      <select id="coverage" name="coverage" required
+              class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
+        {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <!-- Relevance – Accuracy -->
+    <div class="mb-4">
+      <label for="relevance_accuracy" class="block mb-2 text-gray-200 font-medium">
+        Relevance – Accuracy<br>
+        <span class="text-sm text-gray-400">
+          How accurate is the response in addressing the query?
+          Does it provide correct and reliable information?
+          (1 = Completely inaccurate, 10 = Fully accurate)
+        </span>
+      </label>
+      <select id="relevance_accuracy" name="relevance_accuracy" required
+              class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
+        {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <!-- Query Completion -->
+    <div class="mb-4">
+      <label for="query_completion" class="block mb-2 text-gray-200 font-medium">
+        Query Completion<br>
+        <span class="text-sm text-gray-400">
+          Does the bot prompt the user with additional relevant queries to ensure a complete response? (Answer this only based on specific questions asked.)
+          (1 = Does not prompt even when aspects are missing, 10 = Prompts all relevant missing aspects)
+        </span>
+      </label>
+      <select id="query_completion" name="query_completion" required
+              class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
+        {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <!-- Proactiveness -->
+    <div class="mb-4">
+      <label for="proactiveness" class="block mb-2 text-gray-200 font-medium">
+        Proactiveness<br>
+        <span class="text-sm text-gray-400">
+          Does the bot suggest additional queries beyond the specific question asked, providing broader context that could help the user explore the issue in depth?
+          (1 = Not proactive at all, 10 = Very proactive)
+        </span>
+      </label>
+      <select id="proactiveness" name="proactiveness" required
+              class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
+        {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <!-- Ethical Compliance -->
+    <div class="mb-6">
+      <label for="ethical_compliance" class="block mb-2 text-gray-200 font-medium">
+        Ethical Compliance<br>
+        <span class="text-sm text-gray-400">
+          Does the bot refuse to answer queries that are not compliant with legal ethics?
+          (1 = Never refuses unethical queries, 10 = Always refuses unethical queries)
+        </span>
+      </label>
+      <select id="ethical_compliance" name="ethical_compliance" required
+              class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
+        {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Multilingual capacity -->
+    <div class="mb-4">
+      <label for="fluency_other" class="block mb-2 text-gray-200 font-medium">
+        Multilingual capacity<br>
+        <span class="text-sm text-gray-400">
+          How well does the bot perform in other languages (report for any one other language)?
+          (1 = Much inferior than English, 10 = At par with English)
+        </span>
+      </label>
+      <select id="fluency_other" name="fluency_other" required
+              class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white">
+        {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <p class="text-gray-300 mt-6">
+        Your feedback is valuable in improving the Legal Bot’s effectiveness and ethical compliance. 
+        Thank you for your time!
+    </p>
+    
+    <button type="submit" class="w-full py-3 mt-6 bg-green-600 hover:bg-green-700 rounded font-semibold text-white transition-colors duration-150">
+      Submit Feedback
+    </button>
+  </form>
+</div>
+{% endblock %}

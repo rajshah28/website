@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-6xl mx-auto">
+  <!-- Sticky query header -->
+  <div class="bg-gray-800 rounded-xl shadow-lg p-4 border-2 border-gray-700 sticky top-20 z-10">
+    <div class="flex justify-between items-center text-white">
+      <p class="font-bold text-2xl text-center">Query {{ current_group_idx + 1 }} of {{ total_groups }}</p>
+    </div>
+    <h2 >{{ current_query }}</h2>
+  </div>
+  <!-- End sticky header -->
+  <form action="{{ url_for('rate') }}" method="post" class="space-y-6 mt-4">
+    <!-- Hidden fields to persist state and mapping -->
+    <input type="hidden" name="file" value="{{ file_id }}">
+    <input type="hidden" name="query_col" value="{{ query_col }}">
+    <input type="hidden" name="response_col" value="{{ response_col }}">
+    <input type="hidden" name="type_col" value="{{ type_col }}">
+    
+    <!-- Loop over all responses in the current group -->
+    {% for response in current_group.responses %}
+      {% set idx = loop.index0 %}
+      <div class="bg-gray-700 rounded-lg p-4 mb-6">
+        <div class="flex justify-between items-center text-white mb-2">
+          <p class = "font-bold">Response: ({{ response.response_type }}) - {{ idx + 1 }} of {{ total_responses }}</p>
+        </div>
+        <p class="whitespace-pre-wrap text-white mb-4">{{ response.response }}</p>
+        
+        <!-- Rating inputs for this response -->
+        {% for col in rating_columns %}
+          <div class="mb-4">
+            <span class="block mb-2 font-semibold text-white">{{ col }}:</span>
+            <div class="flex space-x-4">
+              {% for rating in range(1, 11) %}
+                <label class="flex items-center space-x-2 cursor-pointer text-white">
+                  <input type="radio"
+                         name="{{ col }}_{{ idx }}"
+                         value="{{ rating }}"
+                         required
+                         {% if current_rating and current_rating[idx] and current_rating[idx].get(col) == rating|string %} checked {% endif %}
+                         class="form-radio h-5 w-5 text-green-400 focus:ring-green-400 transition duration-150">
+                  <span class="text-sm">{{ rating }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+        
+        <div class="mb-4">
+          <label for="response_review_{{ idx }}" class="block mb-2 font-semibold text-white">
+            What is your general idea about this response? Can you explain precisely? What would you like to change in this response?
+          </label>
+          <textarea id="response_review_{{ idx }}" name="response_review_{{ idx }}" rows="2" class="w-full p-2 rounded bg-gray-700 border hover:border-green-400 focus:border-green-600 focus:outline-none text-white">
+            {{ current_rating and current_rating[idx] and current_rating[idx].get('response_review') or "" }}
+          </textarea>
+        </div>
+      </div>
+    {% endfor %}
+    
+    <div class="flex justify-between">
+      <button type="submit" name="action" value="prev" class="px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded text-white">Previous Query</button>
+      <button type="submit" name="action" value="next" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded text-white">
+        {% if current_group_idx == total_groups - 1 %}
+          Finish
+        {% else %}
+          Next Query
+        {% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

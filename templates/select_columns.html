@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-2 hover:border-green-400 p-8 flex flex-col justify-between border-2 border-gray-700">
+  <h2 class="text-3xl font-bold mb-6 text-center text-white">LLM Response Evaluation</h2>
+  <form action="{{ url_for('select_columns', file=request.args.get('file')) }}" method="post" class="space-y-6">
+    <!-- Query Column Dropdown -->
+    <div>
+      <label for="query_column" class="block mb-2 font-semibold text-white">Select Query Column:</label>
+      <select id="query_column" name="query_column" class="w-full p-2 rounded bg-gray-700 text-white">
+        {% for col in all_columns %}
+          <option value="{{ col }}" {% if loop.index0 == 1 %}selected{% endif %}>{{ col }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Response Column Dropdown -->
+    <div>
+      <label for="response_column" class="block mb-2 font-semibold text-white">Select Response Column:</label>
+      <select id="response_column" name="response_column" class="w-full p-2 rounded bg-gray-700 text-white">
+        {% for col in all_columns %}
+          <option value="{{ col }}" {% if loop.index0 == 2 %}selected{% endif %}>{{ col }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Type Column Dropdown -->
+    <div>
+      <label for="type_column" class="block mb-2 font-semibold text-white">Select Type Column:</label>
+      <select id="type_column" name="type_column" class="w-full p-2 rounded bg-gray-700 text-white">
+        {% for col in all_columns %}
+          <option value="{{ col }}" {% if loop.index0 == 3 %}selected{% endif %}>{{ col }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Rating Columns (Checkboxes) -->
+    <div>
+      <label class="block mb-2 font-semibold text-white">Select Rating Columns:</label>
+      <div class="flex flex-col space-y-2">
+        {% for col in rating_candidates %}
+          <label class="flex items-center space-x-2 text-white">
+            <input type="checkbox" name="rating_columns" value="{{ col }}" class="form-checkbox h-3 w-3 text-green-400">
+            <span>{{ col }}</span>
+          </label>
+        {% endfor %}
+      </div>
+    </div>
+
+    <button type="submit" class="w-full py-3 bg-green-600 hover:bg-green-700 rounded font-semibold transition duration-300 text-white">
+      Next
+    </button>
+  </form>
+</div>
+{% endblock %}

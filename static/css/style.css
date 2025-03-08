@@ -1,0 +1,104 @@
+/* Global styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #f0f0f0;
+  }
+  
+  /* Header */
+  header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    color: #121212;
+  }
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    height: 40px;
+  }
+  nav a {
+    color: #121212;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+  }
+  nav a:hover {
+    color: #007BFF;
+    transition: color 0.3s ease;
+  }
+  
+  /* Content container */
+  .content {
+    padding: 20px;
+  }
+  
+  /* Form container */
+  .form-container {
+    background-color: #1e1e1e;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .form-group input[type="file"],
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+  .form-group input[type="radio"],
+  .form-group input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  .radio-group label, .checkbox-group label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  button {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105 border border-gray-700 p-8">
+  <h2 class="text-3xl font-bold mb-8 text-center text-white">
+    Lawyer Registration
+  </h2>
+  <form action="{{ url_for('register') }}" method="post" class="space-y-6">
+    <div>
+      <label for="lawyer_name" class="block mb-2 text-gray-200 font-medium">Name</label>
+      <input type="text" id="lawyer_name" name="lawyer_name" required
+             class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400" placeholder="Enter full name" />
+    </div>
+    <div>
+      <label for="email" class="block mb-2 text-gray-200 font-medium">E-mail</label>
+      <input type="email" id="email" name="email" required
+             class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400" placeholder="Enter your email" />
+    </div>
+    <div>
+      <label for="graduation_year" class="block mb-2 text-gray-200 font-medium">Graduation Year</label>
+      <input type="text" id="graduation_year" name="graduation_year" required
+             class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400" placeholder="e.g. 2020" />
+    </div>
+    <div>
+      <label class="block mb-2 text-gray-200 font-medium">Age</label>
+      <div class="flex flex-wrap gap-4">
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="age" value="18-22" required class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">18 - 22</span>
+        </label>
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="age" value="23-30" class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">23 - 30</span>
+        </label>
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="age" value="31-39" class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">31 - 39</span>
+        </label>
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="age" value="40-49" class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">40 - 49</span>
+        </label>
+      </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-gray-200 font-medium">Gender</label>
+      <div class="flex flex-wrap gap-4">
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="gender" value="Male" required class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">Male</span>
+        </label>
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="gender" value="Female" class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">Female</span>
+        </label>
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="gender" value="Prefer not to say" class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">Prefer not to say</span>
+        </label>
+      </div>
+    </div>
+    <div>
+      <label for="highest_education" class="block mb-2 text-gray-200 font-medium">Highest education received</label>
+      <input type="text" id="highest_education" name="highest_education" required
+             class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400" placeholder="Enter highest education" />
+    </div>
+    <div>
+      <label class="block mb-2 text-gray-200 font-medium">Do you regularly use LLMs for your work and assignments?</label>
+      <div class="flex flex-wrap gap-4">
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="use_llms" value="Yes" required class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">Yes</span>
+        </label>
+        <label class="inline-flex items-center text-gray-200">
+          <input type="radio" name="use_llms" value="No" class="form-radio text-green-400 focus:ring-green-400" />
+          <span class="ml-2">No</span>
+        </label>
+      </div>
+    </div>
+    <div>
+      <label for="incorrect_example" class="block mb-2 text-gray-200 font-medium">
+        Example where LLMs gave an incorrect response regarding legal matters
+      </label>
+      <textarea id="incorrect_example" name="incorrect_example" rows="3" required
+                class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400" placeholder="Describe the example"></textarea>
+    </div>
+    <div>
+      <label for="applied_llms" class="block mb-2 text-gray-200 font-medium">
+        Have you applied LLMs to analyze or reason through a legal case?
+      </label>
+      <input type="text" id="applied_llms" name="applied_llms" required
+             class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400" placeholder="Describe your experience" />
+    </div>
+    <div>
+      <label for="difficult_case" class="block mb-2 text-gray-200 font-medium">
+        Which type of legal case do you find most difficult or ambiguous?
+      </label>
+      <input type="text" id="difficult_case" name="difficult_case" required
+             class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400" placeholder="e.g. Criminal, Civil, etc." />
+    </div>
+    <div>
+      <label for="llm_usage" class="block mb-2 text-gray-200 font-medium">
+        Which LLM do you generally use? ChatGPT? Gemini? Llama? Please specify the list of LLMs you mostly use
+      </label>
+      <input type="text" id="llm_usage" name="llm_usage" required
+             class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-300 transition duration-150 text-white placeholder-gray-400" placeholder="e.g. ChatGPT, Gemini, etc." />
+    </div>
+    <button type="submit" class="w-full py-3 mt-6 bg-green-600 hover:bg-green-700 rounded font-semibold text-white transition-colors duration-150">
+      Submit
+    </button>
+  </form>
+</div>
+{% endblock %}

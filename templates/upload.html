@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-2 hover:border-green-400 p-8 flex flex-col justify-between border-2 border-gray-700">
+  <h2 class="text-2xl font-bold mb-6 text-center text-white">Upload Query-Response File</h2>
+  <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" class="space-y-6">
+    <div class="mb-4">
+      <label for="file" class="block mb-2 text-white">Choose File</label>
+      <input type="file" id="file" name="file" required class="w-full bg-gray-100 text-gray-900 p-2 border border-gray-600 rounded">
+    </div>
+    <button type="submit" class="w-full py-2 bg-green-600 hover:bg-green-700 rounded font-semibold text-white">Upload</button>
+  </form>
+</div>
+{% endblock %}
